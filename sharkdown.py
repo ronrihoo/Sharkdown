@@ -23,8 +23,11 @@ class MainWindow(QMainWindow, sharkdown_ui.Ui_Sharkdown):
         self.actionExit.triggered.connect(self.exit_program)
         # MENU - VIEW
         self.actionEditor_Viewer.setText(AppConstants.data['actions']['editor_viewer'])
-        self.actionEditor_Viewer.setText(AppConstants.data['actions']['editor_only'])
+        self.actionEditor_Only.setText(AppConstants.data['actions']['editor_only'])
         self.actionViewer_Only.setText(AppConstants.data['actions']['viewer_only'])
+        self.actionEditor_Viewer.triggered.connect(self.editor_viewer_view)
+        self.actionEditor_Only.triggered.connect(self.editor_only_view)
+        self.actionViewer_Only.triggered.connect(self.viewer_only_view)
         # MENU - HELP
         self.actionDocs.setText(AppConstants.data['actions']['docs'])
         self.actionAbout.setText(AppConstants.data['actions']['about'])
@@ -38,7 +41,7 @@ class MainWindow(QMainWindow, sharkdown_ui.Ui_Sharkdown):
     def parse_and_convert(self):
         plain = self.Markdown.toPlainText()
         self.HtmlViewer.setHtml(plain)
-        print(plain)            # to see unformatted text
+        print(plain)            # to see unformatted text (for testing)
 
     def new_file(self):
         self.Markdown.setText('')
@@ -63,6 +66,18 @@ class MainWindow(QMainWindow, sharkdown_ui.Ui_Sharkdown):
     def exit_program(self):
         # make modal via dialog box--if work is unsaved. But for now, just close.
         self.close()
+
+    def editor_viewer_view(self):
+        self.Markdown.setVisible(True)
+        self.HtmlViewer.setVisible(True)
+
+    def editor_only_view(self):
+        self.Markdown.setVisible(True)
+        self.HtmlViewer.setVisible(False)
+
+    def viewer_only_view(self):
+        self.Markdown.setVisible(False)
+        self.HtmlViewer.setVisible(True)
 
 
 if __name__ == '__main__':
