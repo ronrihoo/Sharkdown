@@ -10,14 +10,30 @@ class MainWindow(QMainWindow, sharkdown_ui.Ui_Sharkdown):
         QMainWindow.__init__(self)
         QMainWindow.setWindowTitle(self, AppConstants.data['properties']['title'])
         self.setupUi(self)
+        # MENU - FILE
+        self.actionNew.setText(AppConstants.data['actions']['new'])
+        self.actionLoad.setText(AppConstants.data['actions']['load'])
+        self.actionSave.setText(AppConstants.data['actions']['save'])
+        self.actionSave_As.setText(AppConstants.data['actions']['save_as'])
+        self.actionExit.setText(AppConstants.data['actions']['exit'])
         self.actionNew.triggered.connect(self.new_file)
         self.actionLoad.triggered.connect(self.load_file)
         self.actionSave.triggered.connect(self.save_file)
         self.actionSave_As.triggered.connect(self.save_as_file)
         self.actionExit.triggered.connect(self.exit_program)
+        # MENU - VIEW
+        self.actionEditor_Viewer.setText(AppConstants.data['actions']['editor_viewer'])
+        self.actionEditor_Viewer.setText(AppConstants.data['actions']['editor_only'])
+        self.actionViewer_Only.setText(AppConstants.data['actions']['viewer_only'])
+        # MENU - HELP
+        self.actionDocs.setText(AppConstants.data['actions']['docs'])
+        self.actionAbout.setText(AppConstants.data['actions']['about'])
+        # FUNCTIONALITY
         self.Markdown.setText("This or the Apocalypse")             # initial text for testing
         self.Markdown.textChanged.connect(self.parse_and_convert)
         self.show()
+        # CYCLE-SUPPORT (ERROR-CHECKING)
+        # ...
 
     def parse_and_convert(self):
         plain = self.Markdown.toPlainText()
