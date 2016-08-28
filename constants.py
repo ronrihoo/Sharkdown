@@ -43,6 +43,7 @@ class AppConstants:
             editor='Alt+2',
             viewer='ALt+3')
     )
+
     style = dict(
         layout=dict(
             bold='****',
@@ -64,6 +65,6 @@ class AppConstants:
             Nonroot_Command='```command\n\n```',
             Root_Command='```super_user\n\n```',
             Custom_Command='```custom_prefix()\n\n```',
-            Image='![Alt text for screen readers]\n(https://www. )\n'
+            Image='![Alt text for screen readers]\n(https://)\n'
         )
     )

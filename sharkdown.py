@@ -16,7 +16,7 @@ class MainWindow(QMainWindow, sharkdown_ui.Ui_Sharkdown):
         self.fullpath = ""
         # MENU - FILE
         self.actionNew.setText(AppConstants.data['actions']['new'])
-        self.actionLoad.setText(AppConstants.data['actions']['load'])
+        self.actionLoad.setText(AppConstants.data['actions']['open'])
         self.actionSave.setText(AppConstants.data['actions']['save'])
         self.actionSave_As.setText(AppConstants.data['actions']['save_as'])
         self.actionExit.setText(AppConstants.data['actions']['exit'])
