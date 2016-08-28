@@ -31,6 +31,8 @@ class MainWindow(QMainWindow, sharkdown_ui.Ui_Sharkdown):
         # MENU - HELP
         self.actionDocs.setText(AppConstants.data['actions']['docs'])
         self.actionAbout.setText(AppConstants.data['actions']['about'])
+        self.actionDocs.triggered.connect(self.send_to_docs)
+        self.actionAbout.triggered.connect(self.about_popup)
         # FUNCTIONALITY
         self.Markdown.setText("This or the Apocalypse")             # initial text for testing
         self.Markdown.textChanged.connect(self.parse_and_convert)
@@ -79,6 +81,11 @@ class MainWindow(QMainWindow, sharkdown_ui.Ui_Sharkdown):
         self.Markdown.setVisible(False)
         self.HtmlViewer.setVisible(True)
 
+    def send_to_docs(self):
+        pass
+
+    def about_popup(self):
+        pass
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
