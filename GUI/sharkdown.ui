@@ -92,7 +92,7 @@
     <string>Editor - Viewer</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+1</string>
+    <string>Alt+1</string>
    </property>
   </action>
   <action name="actionEditor_Only">
@@ -100,7 +100,7 @@
     <string>Editor Only</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+2</string>
+    <string>Alt+2</string>
    </property>
   </action>
   <action name="actionViewer_Only">
@@ -108,7 +108,7 @@
     <string>Viewer Only</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+3</string>
+    <string>Alt+3</string>
    </property>
   </action>
   <action name="actionNew">

@@ -39,7 +39,7 @@ class AppConstants:
             exit='Ctrl+Q',
             load='Ctrl+O',
             save='Ctrl+S',
-            editor_viewer='Ctrl+1',
-            editor='Ctrl+2',
-            viewer='Ctrl+3')
+            editor_viewer='Alt+1',
+            editor='Alt+2',
+            viewer='ALt+3')
     )

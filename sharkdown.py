@@ -55,8 +55,8 @@ class MainWindow(QMainWindow, sharkdown_ui.Ui_Sharkdown):
         try:
             filename = QFileDialog.getOpenFileName(filedialog, 'Open File', os.path.expanduser('~'),
                                                    "Markdown (*.md, *.markdown); Text (*.txt)")
-            self.Markdown.setText('')
             with open(filename, 'r') as f:
+                self.Markdown.setText('')
                 self.Markdown.insertPlainText(f.read())
         except:
             print("'Load' operation closed.")
