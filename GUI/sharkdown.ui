@@ -60,6 +60,7 @@
      <string>File</string>
     </property>
     <addaction name="actionNew"/>
+    <addaction name="actionLoad"/>
     <addaction name="actionSave"/>
     <addaction name="actionSave_As"/>
     <addaction name="separator"/>
@@ -155,6 +156,11 @@
   <action name="actionAbout">
    <property name="text">
     <string>About</string>
+   </property>
+  </action>
+  <action name="actionLoad">
+   <property name="text">
+    <string>Load</string>
    </property>
   </action>
  </widget>

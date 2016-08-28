@@ -83,7 +83,10 @@ class Ui_Sharkdown(object):
         self.actionDocs.setObjectName(_fromUtf8("actionDocs"))
         self.actionAbout = QtGui.QAction(Sharkdown)
         self.actionAbout.setObjectName(_fromUtf8("actionAbout"))
+        self.actionLoad = QtGui.QAction(Sharkdown)
+        self.actionLoad.setObjectName(_fromUtf8("actionLoad"))
         self.menuFile.addAction(self.actionNew)
+        self.menuFile.addAction(self.actionLoad)
         self.menuFile.addAction(self.actionSave)
         self.menuFile.addAction(self.actionSave_As)
         self.menuFile.addSeparator()
@@ -123,4 +126,5 @@ class Ui_Sharkdown(object):
         self.actionExit.setShortcut(_translate("Sharkdown", "Ctrl+Q", None))
         self.actionDocs.setText(_translate("Sharkdown", "Docs", None))
         self.actionAbout.setText(_translate("Sharkdown", "About", None))
+        self.actionLoad.setText(_translate("Sharkdown", "Load", None))
 
