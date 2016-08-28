@@ -33,7 +33,7 @@ class MainWindow(QMainWindow, sharkdown_ui.Ui_Sharkdown):
         self.actionAbout.setText(AppConstants.data['actions']['about'])
         self.actionDocs.triggered.connect(self.send_to_docs)
         self.actionAbout.triggered.connect(self.about_popup)
-        # FUNCTIONALITY
+        # MAIN FUNCTIONALITY
         self.Markdown.setText("This or the Apocalypse")             # initial text for testing
         self.Markdown.textChanged.connect(self.parse_and_convert)
         self.show()
@@ -42,6 +42,7 @@ class MainWindow(QMainWindow, sharkdown_ui.Ui_Sharkdown):
 
     def parse_and_convert(self):
         plain = self.Markdown.toPlainText()
+        # ... parse... convert... return
         self.HtmlViewer.setHtml(plain)
         print(plain)            # to see unformatted text (for testing)
 
@@ -63,7 +64,14 @@ class MainWindow(QMainWindow, sharkdown_ui.Ui_Sharkdown):
         pass
 
     def save_as_file(self):
-        pass
+        filedialog = QFileDialog()
+        filename = QFileDialog.getSaveFileName(filedialog, 'Dialog Title', '/')
+        if filename:
+            print(filename)
+            with open(filename, 'w') as file:
+                file.write(str(self.Markdown.toPlainText()))
+        else:
+            print("No filename given.")
 
     def exit_program(self):
         # make modal via dialog box--if work is unsaved. But for now, just close.
