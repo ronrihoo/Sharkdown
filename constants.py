@@ -45,6 +45,10 @@ class AppConstants:
     )
     style = dict(
         layout=dict(
+            bold='****',
+            italics='__',
+            Em_Dash='—',
+            Link='[](https://)',    # cursor goes in between brackets
             note='<$>[note]\n**Note:** \n<$>\n',
             warning='<$>[warning]\n**Warning:** \n<$>\n',
             H1='# ',
