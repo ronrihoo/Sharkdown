@@ -126,5 +126,7 @@ class Ui_Sharkdown(object):
         self.actionExit.setShortcut(_translate("Sharkdown", "Ctrl+Q", None))
         self.actionDocs.setText(_translate("Sharkdown", "Docs", None))
         self.actionAbout.setText(_translate("Sharkdown", "About", None))
-        self.actionLoad.setText(_translate("Sharkdown", "Load", None))
+        self.actionLoad.setText(_translate("Sharkdown", "Open", None))
+        self.actionLoad.setToolTip(_translate("Sharkdown", "Open", None))
+        self.actionLoad.setShortcut(_translate("Sharkdown", "Ctrl+O", None))
 
