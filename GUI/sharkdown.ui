@@ -6,12 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>899</width>
     <height>600</height>
    </rect>
   </property>
   <property name="font">
    <font>
+    <weight>50</weight>
+    <bold>false</bold>
     <stylestrategy>NoAntialias</stylestrategy>
    </font>
   </property>
@@ -51,7 +53,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>899</width>
      <height>21</height>
     </rect>
    </property>
@@ -73,6 +75,8 @@
     <addaction name="actionEditor_Viewer"/>
     <addaction name="actionEditor_Only"/>
     <addaction name="actionViewer_Only"/>
+    <addaction name="separator"/>
+    <addaction name="actionToolbar"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -82,17 +86,125 @@
     <addaction name="separator"/>
     <addaction name="actionAbout"/>
    </widget>
+   <widget class="QMenu" name="menuFormat">
+    <property name="title">
+     <string>Format</string>
+    </property>
+    <widget class="QMenu" name="menuCommand">
+     <property name="title">
+      <string>Command</string>
+     </property>
+     <addaction name="actionCommand_Nonroot"/>
+     <addaction name="actionCommand_Root"/>
+     <addaction name="actionCommand_Custom"/>
+    </widget>
+    <widget class="QMenu" name="menuCode">
+     <property name="title">
+      <string>Code</string>
+     </property>
+     <addaction name="actionInline_Code"/>
+     <addaction name="actionCode_Block"/>
+     <addaction name="separator"/>
+     <addaction name="actionLabeled_Code"/>
+     <addaction name="actionSecondary_Label_Code"/>
+    </widget>
+    <widget class="QMenu" name="menuVariable">
+     <property name="title">
+      <string>Variable</string>
+     </property>
+     <addaction name="actionVariable_2"/>
+     <addaction name="actionInline_Variable"/>
+    </widget>
+    <addaction name="actionH1"/>
+    <addaction name="actionH2"/>
+    <addaction name="actionH3"/>
+    <addaction name="separator"/>
+    <addaction name="actionBold"/>
+    <addaction name="actionItalic"/>
+    <addaction name="separator"/>
+    <addaction name="actionList"/>
+    <addaction name="separator"/>
+    <addaction name="menuCommand"/>
+    <addaction name="separator"/>
+    <addaction name="menuCode"/>
+    <addaction name="menuVariable"/>
+    <addaction name="separator"/>
+    <addaction name="actionNote_Block"/>
+    <addaction name="actionWarning_Block"/>
+    <addaction name="separator"/>
+    <addaction name="actionURL"/>
+    <addaction name="actionImage"/>
+    <addaction name="separator"/>
+    <addaction name="actionEm_Dash"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="actionUndo"/>
+    <addaction name="actionCopy"/>
+    <addaction name="actionPaste"/>
+    <addaction name="separator"/>
+    <addaction name="actionSkip"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
    <addaction name="menuView"/>
+   <addaction name="menuFormat"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="font">
+    <font>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionH1"/>
+   <addaction name="actionH2"/>
+   <addaction name="actionH3"/>
+   <addaction name="separator"/>
+   <addaction name="actionBold"/>
+   <addaction name="actionItalic"/>
+   <addaction name="separator"/>
+   <addaction name="actionList"/>
+   <addaction name="separator"/>
+   <addaction name="actionInline_Code"/>
+   <addaction name="actionCode_Block"/>
+   <addaction name="actionLabeled_Code"/>
+   <addaction name="actionSecondary_Label_Code"/>
+   <addaction name="separator"/>
+   <addaction name="actionVariable_2"/>
+   <addaction name="actionInline_Variable"/>
+   <addaction name="separator"/>
+   <addaction name="actionCommand_Nonroot"/>
+   <addaction name="actionCommand_Root"/>
+   <addaction name="actionCommand_Custom"/>
+   <addaction name="separator"/>
+   <addaction name="actionNote_Block"/>
+   <addaction name="actionWarning_Block"/>
+   <addaction name="separator"/>
+   <addaction name="actionURL"/>
+   <addaction name="actionImage"/>
+   <addaction name="separator"/>
+   <addaction name="actionEm_Dash"/>
+  </widget>
   <action name="actionEditor_Viewer">
    <property name="text">
     <string>Editor - Viewer</string>
    </property>
    <property name="shortcut">
-    <string>Alt+1</string>
+    <string>Ctrl+1</string>
    </property>
   </action>
   <action name="actionEditor_Only">
@@ -100,7 +212,7 @@
     <string>Editor Only</string>
    </property>
    <property name="shortcut">
-    <string>Alt+2</string>
+    <string>Ctrl+2</string>
    </property>
   </action>
   <action name="actionViewer_Only">
@@ -108,7 +220,7 @@
     <string>Viewer Only</string>
    </property>
    <property name="shortcut">
-    <string>Alt+3</string>
+    <string>Ctrl+3</string>
    </property>
   </action>
   <action name="actionNew">
@@ -135,17 +247,15 @@
     <string>Ctrl+Shift+S</string>
    </property>
   </action>
-  <action name="actionClose">
-   <property name="text">
-    <string>Close</string>
-   </property>
-  </action>
   <action name="actionExit">
    <property name="text">
     <string>Exit</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::QuitRole</enum>
    </property>
   </action>
   <action name="actionDocs">
@@ -156,6 +266,9 @@
   <action name="actionAbout">
    <property name="text">
     <string>About</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::AboutRole</enum>
    </property>
   </action>
   <action name="actionLoad">
@@ -169,7 +282,316 @@
     <string>Ctrl+O</string>
    </property>
   </action>
+  <action name="actionH1">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>H1</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+1</string>
+   </property>
+  </action>
+  <action name="actionH2">
+   <property name="text">
+    <string>H2</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+2</string>
+   </property>
+  </action>
+  <action name="actionH3">
+   <property name="text">
+    <string>H3</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+3</string>
+   </property>
+  </action>
+  <action name="actionToolbar">
+   <property name="text">
+    <string>Toolbar</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+T</string>
+   </property>
+  </action>
+  <action name="actionBold">
+   <property name="text">
+    <string>Bold</string>
+   </property>
+   <property name="iconText">
+    <string>B</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+B</string>
+   </property>
+  </action>
+  <action name="actionItalic">
+   <property name="text">
+    <string>Italic</string>
+   </property>
+   <property name="iconText">
+    <string>I</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+I</string>
+   </property>
+  </action>
+  <action name="actionInline_Code">
+   <property name="text">
+    <string>Inline Code</string>
+   </property>
+   <property name="iconText">
+    <string>`C`</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+Shift+C</string>
+   </property>
+  </action>
+  <action name="actionCode_Block">
+   <property name="text">
+    <string>Code Block</string>
+   </property>
+   <property name="iconText">
+    <string>```C```</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+C</string>
+   </property>
+  </action>
+  <action name="actionNote_Block">
+   <property name="text">
+    <string>Note Block</string>
+   </property>
+   <property name="iconText">
+    <string>Note</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+N</string>
+   </property>
+  </action>
+  <action name="actionURL">
+   <property name="text">
+    <string>URL</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+U</string>
+   </property>
+  </action>
+  <action name="actionImage">
+   <property name="text">
+    <string>Image</string>
+   </property>
+   <property name="iconText">
+    <string>Img</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+M</string>
+   </property>
+  </action>
+  <action name="actionCommand_Nonroot">
+   <property name="text">
+    <string>Command - Nonroot</string>
+   </property>
+   <property name="iconText">
+    <string>$</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+D</string>
+   </property>
+  </action>
+  <action name="actionCommand_Root">
+   <property name="text">
+    <string>Command - Root</string>
+   </property>
+   <property name="iconText">
+    <string>#</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+S</string>
+   </property>
+  </action>
+  <action name="actionCommand_Custom">
+   <property name="text">
+    <string>Command - Custom</string>
+   </property>
+   <property name="iconText">
+    <string>Custom</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+A</string>
+   </property>
+  </action>
+  <action name="actionWarning_Block">
+   <property name="text">
+    <string>Warning Block</string>
+   </property>
+   <property name="iconText">
+    <string>Warning</string>
+   </property>
+   <property name="toolTip">
+    <string>Warning Block</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+W</string>
+   </property>
+  </action>
+  <action name="actionEm_Dash">
+   <property name="text">
+    <string>Em Dash</string>
+   </property>
+   <property name="iconText">
+    <string>—</string>
+   </property>
+   <property name="toolTip">
+    <string>Em Dash</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+-</string>
+   </property>
+  </action>
+  <action name="actionList">
+   <property name="text">
+    <string>List</string>
+   </property>
+   <property name="toolTip">
+    <string>List</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+L</string>
+   </property>
+  </action>
+  <action name="actionLabeled_Code">
+   <property name="text">
+    <string>Labeled Code</string>
+   </property>
+   <property name="iconText">
+    <string>[labeled]Code</string>
+   </property>
+   <property name="toolTip">
+    <string>Labeled Code</string>
+   </property>
+  </action>
+  <action name="actionSecondary_Label_Code">
+   <property name="text">
+    <string>Secondary Labeled Code</string>
+   </property>
+   <property name="iconText">
+    <string>[2nd_labeled]Code</string>
+   </property>
+   <property name="toolTip">
+    <string>Secondary Labeled Code</string>
+   </property>
+  </action>
+  <action name="actionVariable_2">
+   <property name="text">
+    <string>Variable</string>
+   </property>
+   <property name="iconText">
+    <string>Var</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+V</string>
+   </property>
+  </action>
+  <action name="actionInline_Variable">
+   <property name="text">
+    <string>Inline Variable</string>
+   </property>
+   <property name="iconText">
+    <string>`Var`</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+Shift+V</string>
+   </property>
+  </action>
+  <action name="actionUndo">
+   <property name="text">
+    <string>Undo</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Z</string>
+   </property>
+  </action>
+  <action name="actionCopy">
+   <property name="text">
+    <string>Copy</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
+   </property>
+  </action>
+  <action name="actionPaste">
+   <property name="text">
+    <string>Paste</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+V</string>
+   </property>
+  </action>
+  <action name="actionSkip">
+   <property name="text">
+    <string>Skip</string>
+   </property>
+   <property name="toolTip">
+    <string>Skip over remaining markdown code</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+Return</string>
+   </property>
+  </action>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>actionCopy</sender>
+   <signal>triggered()</signal>
+   <receiver>Markdown</receiver>
+   <slot>copy()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>228</x>
+     <y>311</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionPaste</sender>
+   <signal>triggered()</signal>
+   <receiver>Markdown</receiver>
+   <slot>paste()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>228</x>
+     <y>311</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionUndo</sender>
+   <signal>triggered()</signal>
+   <receiver>Markdown</receiver>
+   <slot>undo()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>228</x>
+     <y>311</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
