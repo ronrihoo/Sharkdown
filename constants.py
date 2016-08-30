@@ -22,15 +22,6 @@ class AppConstants:
             viewer_only='Viewer Only',
             docs='Documentation',
             about='About'),
-        # images: might use this method to load images, but most likely will avoid due to buggy tendencies cross-plats
-        images=dict(
-            icon='img/icon.png',
-            clear='img/clear.png',
-            bold='img/bold.png',
-            italic='img/italic.png',
-            strike_thru='img/strike_thru.png',
-            code_block='img/code_block.png',
-            quotation='img/quotation.png'),
         # menu_title: these are the containers in the menu; they are not actions, so they have their own dictionary
         menu_title=dict(
             command='Command',
