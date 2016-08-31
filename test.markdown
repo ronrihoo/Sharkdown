@@ -4,7 +4,7 @@
 
 Some Intro
 
-### Prequisites
+### Prerequisites
 
 You will need:
 
