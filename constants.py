@@ -65,7 +65,7 @@ class AppConstants:
             bullet='List',
             inline_code='`C`',
             code_block='```C```',
-            labeled_code='[labeled]Code',
+            labeled_code='[label]Code',
             secondary_labeled_code='[2nd_label]Code',
             variable='Var',
             inline_code_variable='`Var`',
@@ -152,7 +152,8 @@ class AppConstants:
             nonroot_command=5,
             root_command=5,
             custom_command=5,
-            image=1),
+            image=1,
+            default=1),
         # cursor_back: how many characters to go back after inserting markup code -- to end up in the ready position
         cursor_back=dict(
             bold=2,

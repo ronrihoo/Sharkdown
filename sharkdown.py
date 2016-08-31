@@ -5,6 +5,7 @@ from PyQt4.QtGui import *
 from constants import AppConstants
 import GUI.sharkdown_ui as sharkdown_ui
 import ui_config
+from sdparser import sharkdownparser as sdparser
 
 
 class MainWindow(QMainWindow, sharkdown_ui.Ui_Sharkdown):
@@ -38,6 +39,7 @@ class MainWindow(QMainWindow, sharkdown_ui.Ui_Sharkdown):
     # PARSING AND CONVERSION
     def parse_and_convert(self):
         plain = self.Markdown.toPlainText()
+        plain = sdparser(plain)
         # ... parse... convert... return        # preferably: get diff; parse; convert; return; modify with precision
         self.HtmlViewer.setHtml(plain)
         print(plain)  # to see unformatted text (for testing)
@@ -99,9 +101,10 @@ class MainWindow(QMainWindow, sharkdown_ui.Ui_Sharkdown):
             self.fullpath = QFileDialog.getOpenFileName(filedialog, 'Open File', self.filepath,
                                                         "Markdown (*.md, *.markdown); Text (*.txt)")
             with open(self.fullpath, 'r') as f:
-                self.Markdown.insertPlainText(f.read())
-                self.learn_path(self.fullpath)
                 self.Markdown.setText('')
+                self.Markdown.insertPlainText(f.read())
+                print(f.read())
+                self.learn_path(self.fullpath)
                 self.set_window_title()
                 print(self.fullpath)
         except:
@@ -143,6 +146,7 @@ class MainWindow(QMainWindow, sharkdown_ui.Ui_Sharkdown):
     # MENU - EDIT
     def skip_action(self):
         self.set_cursor_forward(AppConstants.data['cursor_skip'][self.cursor_code])
+        self.cursor_code = 'default'
 
     # MENU - VIEW
     def split_view(self):
@@ -255,6 +259,7 @@ class MainWindow(QMainWindow, sharkdown_ui.Ui_Sharkdown):
 
     # MENU - HELP
     def send_to_docs(self):
+        # will handle this later, since there's no use in writing docs at this point
         pass
 
     def about_popup(self):
