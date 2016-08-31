@@ -2,14 +2,15 @@ import os
 import sys
 from PyQt4.QtGui import *
 
-from constants import AppConstants
-import GUI.sharkdown_ui as sharkdown_ui
-import ui_config
-from sdparser import sharkdownparser as sdparser
+from sdparser import sharkdownparser as parser
+from util.constants import AppConstants
+import gui.sharkdownui as sharkdownui
+import gui.uiconfig as uiconfig
+
+# TODO: autoscroll for both editor and viewer widgets
 
 
-class MainWindow(QMainWindow, sharkdown_ui.Ui_Sharkdown):
-
+class MainWindow(QMainWindow, sharkdownui.Ui_Sharkdown):
     def __init__(self):
         QMainWindow.__init__(self)
 
@@ -25,7 +26,7 @@ class MainWindow(QMainWindow, sharkdown_ui.Ui_Sharkdown):
         # APP UI
         self.setupUi(self)
         self.set_window_title()
-        ui_config.setup(self)
+        uiconfig.setup(self)
 
         # MAIN FUNCTIONALITY
         self.Markdown.textChanged.connect(self.parse_and_convert)
@@ -33,18 +34,20 @@ class MainWindow(QMainWindow, sharkdown_ui.Ui_Sharkdown):
 
         # CYCLE-SUPPORT (+ERROR-CHECKING)
         # ...
-        # differential notification (since last save)...
-        # ...
+        # TODO: implement diff notification (compare against last saved state)...
 
     # PARSING AND CONVERSION
+
+    # TODO: get diff; parse; convert; return; modify with precision (important for overall performance, at this state)
     def parse_and_convert(self):
         plain = self.Markdown.toPlainText()
-        plain = sdparser(plain)
-        # ... parse... convert... return        # preferably: get diff; parse; convert; return; modify with precision
+        plain = parser(plain)
         self.HtmlViewer.setHtml(plain)
-        print(plain)  # to see unformatted text (for testing)
+        print(plain)  # TESTING: to see unformatted text (for testing)
 
     # WINDOW MANAGEMENT
+
+    # TODO: adapt window title to diff implementation
     def set_window_title(self):
         if self.filename != "-1":
             QMainWindow.setWindowTitle(self, AppConstants.data['properties']['title'] + " - " + self.filename)
@@ -52,6 +55,7 @@ class MainWindow(QMainWindow, sharkdown_ui.Ui_Sharkdown):
             QMainWindow.setWindowTitle(self, AppConstants.data['properties']['title'] + " - new*")
 
     # PATH MANAGEMENT
+
     def decide_path(self):
         self.backup_path()
         self.filepath = os.getcwd() if self.filepath == "-1" else self.filepath
@@ -66,6 +70,7 @@ class MainWindow(QMainWindow, sharkdown_ui.Ui_Sharkdown):
         self.fullpath = self.temp_path_storage
 
     # TEXT CURSOR
+
     def get_cursor(self):
         return self.Markdown.textCursor()
 
@@ -87,12 +92,15 @@ class MainWindow(QMainWindow, sharkdown_ui.Ui_Sharkdown):
         self.Markdown.setTextCursor(cursor)
 
     # MENU - FILE
+
+    # TODO: does not show (*.md, *.markdown) files when opening and saving (in Windows 7) -- fix and check other OS
+
     def new_file(self):
         self.Markdown.setText('')
         self.filename = "-1"
         self.fullpath = ""
         self.set_window_title()
-        # do not reset filepath; it's used for staying in the last given directory
+        # WARNING: do not reset filepath; it's used for staying in the last given directory
 
     def load_file(self):
         filedialog = QFileDialog()
@@ -135,8 +143,10 @@ class MainWindow(QMainWindow, sharkdown_ui.Ui_Sharkdown):
             self.restore_path()
             print("'Save As' operation stopped.")
 
+    # TODO: implement an exit dialog box
     def exit_program(self):
-        # make modal via dialog box -- for when work is unsaved. But for now, just close.       # need diff
+        # TODO: make modal via dialog box -- for when work is unsaved. But for now, just close.
+        # TODO: needs diff implementation (to compare current state to last saved state)
         if self.filename == "" or self.filename == "-1":
             self.close()
         else:
@@ -144,11 +154,20 @@ class MainWindow(QMainWindow, sharkdown_ui.Ui_Sharkdown):
             # it's not all that embarrassing in the mean time...
 
     # MENU - EDIT
+
+    # Skip Action
+    #
+    # The heart of the UX lays in this feature -- the more featured-filled, the sweeter.
+    #
+    # Brief: after auto-inserting MD code, your cursor goes in the ready position (e.g., in the middle) for that code,
+    #        and you can press Alt+Enter to skip forward through the code once done typing content within it; therefore,
+    #        never leaving the keyboard.
     def skip_action(self):
         self.set_cursor_forward(AppConstants.data['cursor_skip'][self.cursor_code])
         self.cursor_code = 'default'
 
     # MENU - VIEW
+
     def split_view(self):
         self.Markdown.setVisible(True)
         self.HtmlViewer.setVisible(True)
@@ -162,6 +181,7 @@ class MainWindow(QMainWindow, sharkdown_ui.Ui_Sharkdown):
         self.HtmlViewer.setVisible(True)
 
     # MENU - FORMAT - FUNCTIONS
+
     def h1_action(self):
         self.Markdown.insertPlainText(AppConstants.style['layout']['h1'])
         self.cursor_code = AppConstants.data['cursor_code']['h1']
@@ -258,11 +278,13 @@ class MainWindow(QMainWindow, sharkdown_ui.Ui_Sharkdown):
         self.cursor_code = AppConstants.data['cursor_code']['em_dash']
 
     # MENU - HELP
+
     def send_to_docs(self):
-        # will handle this later, since there's no use in writing docs at this point
+        # TODO: handle this later, since there's no use in writing docs at this point
         pass
 
     def about_popup(self):
+        # TODO: handle this later
         pass
 
 

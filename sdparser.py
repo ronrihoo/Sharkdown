@@ -6,11 +6,7 @@ from itertools import zip_longest
 
 def sharkdownparser(text):
 
-    s = text
-
     # SET 1
-
-    sa = []
 
     def sentences(s):
         s = re.split('\\n', s)
@@ -20,10 +16,17 @@ def sharkdownparser(text):
         tokens = re.split('(#\s|\\n##\s|\\n###\s|\\n####\s|\\n-\s)', sentences)
         return tokens
 
+    # TODO: optimize this disaster!
     def tokenize_2(arr):
         tokens = []
-        for item in arr:
+        for i, item in enumerate(arr):
             tokens.append([item[0], re.split('\\n', item[1])])
+            for j, _ in enumerate(tokens[i]):
+                if j > 0:
+                    for k, _ in enumerate(tokens[i][j]):
+                        if 0 < k < len(tokens[i][j]) - 2:
+                            if tokens[i][j][k] != r'':
+                                tokens[i][j][k] += "<br>"
         return tokens
 
     def pack_singles(tokens):
@@ -38,26 +41,34 @@ def sharkdownparser(text):
                 sb.append('<h1>')
                 sb.append(text[0])
                 sb.append('</h1>')
-                for item in text[1:]:
+                for index, item in enumerate(text[1:]):
                     sb.append(item)
+                    if index < len(item[1:]) - 1:
+                        sb.append('<br>')
             elif code == "\n## ":
                 sb.append('<h2>')
                 sb.append(text[0])
                 sb.append('</h2>')
-                for item in text[1:]:
+                for index, item in enumerate(text[1:]):
                     sb.append(item)
+                    if index < len(item[1:]) - 1:
+                        sb.append('<br>')
             elif code == "\n### ":
                 sb.append('<h3>')
                 sb.append(text[0])
                 sb.append('</h3>')
-                for item in text[1:]:
+                for index, item in enumerate(text[1:]):
                     sb.append(item)
+                    if index < len(item[1:]) - 1:
+                        sb.append('<br>')
             elif code == "\n#### ":
                 sb.append('<h4>')
                 sb.append(text[0])
                 sb.append('</h4>')
-                for item in text[1:]:
+                for index, item in enumerate(text[1:]):
                     sb.append(item)
+                    if index < len(item[1:  ]) - 1:
+                        sb.append('<br>')
             elif code == "\n- ":
                 sb.append('<ul><li>')
                 sb.append(text[0])
@@ -76,11 +87,13 @@ def sharkdownparser(text):
     def replace_newlines(s):
         return s.replace("\n", "<BR>")
 
-    b = tokenize_1(s)
+    b = tokenize_1(text)
     b = pack_singles(b)
     b = tokenize_2(b)
+    print(b)
     b = convert_singles(b)
     b = ''.join(b)
+    print(b)
 
     # SET 2
 

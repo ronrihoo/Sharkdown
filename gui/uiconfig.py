@@ -1,4 +1,4 @@
-from constants import AppConstants
+from util.constants import AppConstants
 
 """UI Config
 

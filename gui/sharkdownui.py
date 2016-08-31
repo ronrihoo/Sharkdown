@@ -39,15 +39,30 @@ class Ui_Sharkdown(object):
         self.horizontal_layout.setObjectName(_fromUtf8("horizontal_layout"))
         self.Markdown = QtGui.QTextEdit(self.centralwidget)
         font = QtGui.QFont()
-        font.setFamily(_fromUtf8("MS Sans Serif"))
+        font.setFamily(_fromUtf8("Times New Roman"))
         font.setPointSize(12)
-        font.setKerning(False)
+        font.setKerning(True)
         self.Markdown.setFont(font)
         self.Markdown.setMouseTracking(True)
-        self.Markdown.setFocusPolicy(QtCore.Qt.ClickFocus)
+        self.Markdown.setFocusPolicy(QtCore.Qt.StrongFocus)
+        self.Markdown.setFrameShape(QtGui.QFrame.StyledPanel)
+        self.Markdown.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        self.Markdown.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        self.Markdown.setHtml(_fromUtf8("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'Times New Roman\'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'MS Sans Serif\';\"><br /></p></body></html>"))
+        self.Markdown.setAcceptRichText(False)
         self.Markdown.setObjectName(_fromUtf8("Markdown"))
         self.horizontal_layout.addWidget(self.Markdown)
         self.HtmlViewer = QtGui.QTextBrowser(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily(_fromUtf8("Times New Roman"))
+        font.setPointSize(12)
+        self.HtmlViewer.setFont(font)
+        self.HtmlViewer.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.HtmlViewer.setOpenLinks(False)
         self.HtmlViewer.setObjectName(_fromUtf8("HtmlViewer"))
         self.horizontal_layout.addWidget(self.HtmlViewer)
         self.horizontalLayout.addLayout(self.horizontal_layout)
@@ -243,6 +258,7 @@ class Ui_Sharkdown(object):
         QtCore.QObject.connect(self.actionCopy, QtCore.SIGNAL(_fromUtf8("triggered()")), self.Markdown.copy)
         QtCore.QObject.connect(self.actionPaste, QtCore.SIGNAL(_fromUtf8("triggered()")), self.Markdown.paste)
         QtCore.QObject.connect(self.actionUndo, QtCore.SIGNAL(_fromUtf8("triggered()")), self.Markdown.undo)
+        QtCore.QObject.connect(self.Markdown, QtCore.SIGNAL(_fromUtf8("cursorPositionChanged()")), self.Markdown.update)
         QtCore.QMetaObject.connectSlotsByName(Sharkdown)
 
     def retranslateUi(self, Sharkdown):
